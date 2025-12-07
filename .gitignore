@@ -1,42 +1,20 @@
-# Dependencies
-node_modules/
-npm-debug.log
-yarn-error.log
-pnpm-debug.log
-
-# Build output
-/build/
-/dist/
-/.svelte-kit/
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+__pycache__
+.idea
+tokens/
+venv/
+Docker/MySQL/data/
+static/uploads/
+user_uploads/
+temp
+test-results
 .DS_Store
-*.sublime-project
-*.sublime-workspace
+screenshots/
+.npmrc
+chrome-profile/
+Skills
+node_modules/
+build/
+dist/
+.vscode/
+.svelte-kit/
 
-# OS
-Thumbs.db
-
-# Testing
-coverage/
-.nyc_output/
-
-# Temporary files
-*.tmp
-*.bak
-.cache/
-
-# Package manager lock files (optional - uncomment if you prefer to commit these)
-# package-lock.json
-# yarn.lock
-# pnpm-lock.yaml
