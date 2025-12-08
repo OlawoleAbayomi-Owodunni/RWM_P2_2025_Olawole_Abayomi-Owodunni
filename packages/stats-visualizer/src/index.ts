@@ -3,6 +3,9 @@
  * Reusable Svelte component library for visualizing activity tracking statistics
  */
 
+// Export components
+export { default as SessionsOverDays } from './charts/SessionsOverDays.svelte';
+
 // Export all types
 export type {
   ChartConfig,
@@ -15,5 +18,13 @@ export type {
   DailyStreak
 } from './types';
 
-// Export utility functions (will be added when utilities are created)
-// export { aggregateSessionsByDay, aggregateByWeek, aggregateByMonth, ... } from './utils';
+// Export utility functions
+export {
+  aggregateSessionsByDay,
+  aggregateByWeek,
+  aggregateByMonth,
+  getAverageRatingPerTask,
+  calculateDailyStreak,
+  filterByDateRange,
+  getTaskSessions
+} from './utils';
