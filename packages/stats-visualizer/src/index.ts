@@ -5,6 +5,9 @@
 
 // Export components
 export { default as SessionsOverDays } from './charts/SessionsOverDays.svelte';
+export { default as AvgRatingPerTask } from './charts/AvgRatingPerTask.svelte';
+export { default as SessionRatingsPerTask } from './charts/SessionRatingsPerTask.svelte';
+export { default as TasksPerMonth } from './charts/TasksPerMonth.svelte';
 
 // Export all types
 export type {

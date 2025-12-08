@@ -1,11 +1,34 @@
 <script lang="ts">
-  import { SessionsOverDays } from '@ayola/stats-visualizer';
-  import type { SessionData, ChartConfig } from '@ayola/stats-visualizer';
+  import { SessionsOverDays, AvgRatingPerTask, SessionRatingsPerTask, TasksPerMonth } from '@ayola/stats-visualizer';
+  import type { SessionData, TaskData, ChartConfig } from '@ayola/stats-visualizer';
 
   let sessions: SessionData[] = [];
+  let tasks: TaskData[] = [];
   
   function generateSampleData() {
     sessions = [];
+    tasks = [];
+    
+    // Generate tasks with completion dates spread across months
+    for (let i = 0; i < 12; i++) {
+      const completedDate = new Date();
+      completedDate.setMonth(completedDate.getMonth() - i);
+      completedDate.setDate(1 + Math.floor(Math.random() * 28)); // Random day of month
+      
+      // Random number of tasks per month (1-5)
+      const tasksInMonth = Math.floor(Math.random() * 5) + 1;
+      for (let j = 0; j < tasksInMonth; j++) {
+        tasks.push({
+          id: `task-${i}-${j}`,
+          title: `Task ${i * 5 + j + 1}`,
+          description: `Sample task completed in month ${i}`,
+          completedAt: Math.floor(completedDate.getTime() / 1000), // Unix timestamp
+          totalSessions: Math.floor(Math.random() * 10) + 1,
+          averageRating: (Math.floor(Math.random() * 3) + 3)
+        });
+      }
+    }
+    
     for (let i = 0; i < 30; i++) {
       const date = new Date();
       date.setDate(date.getDate() - i);
@@ -64,6 +87,18 @@
   <main>
     <section>
       <SessionsOverDays data={sessions} {config} />
+    </section>
+
+    <section>
+      <AvgRatingPerTask data={sessions} {config} />
+    </section>
+
+    <section>
+      <SessionRatingsPerTask data={sessions} taskId="task-1" {config} />
+    </section>
+
+    <section>
+      <TasksPerMonth data={tasks} {config} />
     </section>
 
     <section class="info">

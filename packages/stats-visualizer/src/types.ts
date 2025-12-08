@@ -51,6 +51,7 @@ export interface TaskData {
   averageRating?: number;
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  completedAt?: number; // Unix timestamp when task was completed
 }
 
 /**
