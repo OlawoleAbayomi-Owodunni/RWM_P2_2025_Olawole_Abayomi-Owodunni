@@ -87,3 +87,6 @@ static/uploads/
 user_uploads/
 .idea/
 
+
+*storybook.log
+storybook-static
