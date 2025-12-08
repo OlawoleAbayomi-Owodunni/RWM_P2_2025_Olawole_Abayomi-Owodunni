@@ -2,7 +2,7 @@
 
 **Production-ready Svelte component library** for visualizing activity tracking statistics with zero configuration required. Get real-time insights into session data, task performance, and productivity metrics with beautiful, responsive charts.
 
-> **Easy to use?** ✅ Yes! Install, import, and use in 3 lines of code. Full TypeScript support with built-in data utilities.
+> **Easy to use?** Yes! Install, import, and use in 3 lines of code. Full TypeScript support with built-in data utilities.
 
 ## Quick Start (60 seconds)
 
@@ -29,21 +29,21 @@ npm install @ayola/stats-visualizer
 <SessionsOverDays data={sessions} {config} />
 ```
 
-### 3. Done! 🎉
+### 3. Done!
 That's all you need. Chart renders with responsive design, light/dark theme, and interactivity built-in.
 
 ---
 
 ## Features
 
-- ✨ **5 Pre-built Chart Components** - No design work needed
-- 📊 **7 Data Utility Functions** - Transform raw data in seconds
-- 🎨 **Automatic Theme Support** - Light/dark modes with system detection
-- 📱 **100% Responsive** - Mobile-first, works on all devices
-- ⚙️ **Zero Configuration** - Smart defaults, override only what you need
-- 🎯 **Full TypeScript Support** - Type-safe components and utilities
-- 🧪 **32 Unit Tests** - Production-grade reliability
-- 📦 **Lightweight** - Minimal dependencies, tree-shakeable exports
+- Extensible support for 5 Pre-built Chart Components - No design work needed
+- Data utilities with 7 Data Utility Functions - Transform raw data in seconds
+- Responsive theme support with Automatic Theme Support - Light/dark modes with system detection
+- Mobile optimization with 100% Responsive - Mobile-first, works on all devices
+- Simple API with Zero Configuration - Smart defaults, override only what you need
+- TypeScript support with Full TypeScript Support - Type-safe components and utilities
+- Testing with 32 Unit Tests - Production-grade reliability
+- Lightweight footprint with Lightweight - Minimal dependencies, tree-shakeable exports
 
 ## Installation Options
 
@@ -661,34 +661,3 @@ packages/stats-visualizer/
 ```
 
 ---
-
-## Troubleshooting
-
-### Data not showing?
-- Ensure `date` field is valid ISO string or Date object
-- Check that `sessionId` and `taskId` are unique
-- Verify data array is not empty
-
-### Theme not working?
-- Component respects CSS custom properties
-- Ensure parent element allows style application
-
-### Performance issues?
-- Limit data to last 90 days for best performance
-- Use `filterByDateRange()` to reduce dataset
-- Components automatically virtualize large datasets
-
----
-
-## License
-
-MIT
-
----
-
-## Support
-
-For issues, questions, or contributions:
-- 📝 Check [demo app](./demo) for working examples
-- 🧪 Run tests: `npm test`
-- 📚 Review component source code in `src/charts/`

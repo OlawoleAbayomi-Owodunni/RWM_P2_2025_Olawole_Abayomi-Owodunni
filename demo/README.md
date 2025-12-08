@@ -4,12 +4,12 @@ Interactive demo and showcase of all chart components from the @ayola/stats-visu
 
 ## Features
 
-- 📊 **5 Live Charts** - All components rendered with real-time data
-- 🎨 **Theme Toggle** - Switch between light and dark modes
-- 📱 **Responsive** - Works perfectly on mobile and desktop
-- 🔧 **Interactive Controls** - Generate data, filter by date range, adjust settings
-- 🎯 **Real-Time Updates** - See changes instantly as you interact
-- 📈 **Modal Details** - Click bars to see session details
+- Live Charts - All components rendered with real-time data
+- Theme Toggle - Switch between light and dark modes
+- Responsive - Works perfectly on mobile and desktop
+- Interactive Controls - Generate data, filter by date range, adjust settings
+- Real-Time Updates - See changes instantly as you interact
+- Modal Details - Click bars to see session details
 
 ## Quick Start
 
@@ -155,10 +155,10 @@ Then import components:
 
 ## Documentation Links
 
-- 📖 [Main README](../packages/stats-visualizer/README.md) - Full user guide
-- ⚡ [Quick Start](../packages/stats-visualizer/QUICK_START.md) - Get running in 5 minutes
-- 📚 [API Reference](../packages/stats-visualizer/API_REFERENCE.md) - Complete function reference
-- 👨‍💻 [Developer Guide](../packages/stats-visualizer/DEVELOPER_GUIDE.md) - For contributors
+- [Main README](../packages/stats-visualizer/README.md) - Full user guide
+- [Quick Start](../packages/stats-visualizer/QUICK_START.md) - Get running in 5 minutes
+- [API Reference](../packages/stats-visualizer/API_REFERENCE.md) - Complete function reference
+- [Developer Guide](../packages/stats-visualizer/DEVELOPER_GUIDE.md) - For contributors
 
 ## Troubleshooting
 
@@ -184,11 +184,3 @@ Then import components:
 - [Vite](https://vitejs.dev) - Build tool
 - [TypeScript](https://www.typescriptlang.org) - Type safety
 - [@ayola/stats-visualizer](../packages/stats-visualizer) - Chart components
-
-## License
-
-MIT - Same as @ayola/stats-visualizer
-
----
-
-**Ready to use this in your project?** Start with the [Quick Start Guide](../packages/stats-visualizer/QUICK_START.md)

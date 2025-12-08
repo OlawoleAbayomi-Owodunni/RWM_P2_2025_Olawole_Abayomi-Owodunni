@@ -3,13 +3,13 @@
 **Production-ready reusable Svelte component library** for visualizing activity tracking statistics. Build beautiful, responsive analytics dashboards with 5 pre-built chart types and 7 powerful data utility functions.
 
 > **Grade**: P2 Project (50% of RWM Grade)  
-> **Status**: ✅ Complete - All features implemented, tested, and documented
+> **Status**: Complete - All features implemented, tested, and documented
 
-## 📦 What's Inside
+## What's Inside
 
 This is a **monorepo** with two main packages:
 
-### 1. 📊 [@ayola/stats-visualizer](./packages/stats-visualizer)
+### 1. [@ayola/stats-visualizer](./packages/stats-visualizer)
 The core component library with everything you need to visualize activity data.
 
 **Features:**
@@ -25,7 +25,7 @@ The core component library with everything you need to visualize activity data.
 npm install @ayola/stats-visualizer
 ```
 
-### 2. 🎨 [Demo App](./demo)
+### 2. [Demo App](./demo)
 Interactive showcase of all components with real-time data generation and filtering.
 
 **Quick Start:**
@@ -35,14 +35,14 @@ npm install
 npm run dev
 ```
 
-## 🚀 Quick Start (Choose Your Path)
+## Quick Start (Choose Your Path)
 
 ### Path 1: I Just Want to Use It (5 minutes)
 1. **Install:** `npm install @ayola/stats-visualizer`
 2. **Import:** `import { SessionsOverDays } from '@ayola/stats-visualizer'`
 3. **Use:** `<SessionsOverDays data={sessions} config={{ title: 'Analytics' }} />`
 
-👉 **Start here:** [Quick Start Guide](./packages/stats-visualizer/QUICK_START.md)
+**Start here:** [Quick Start Guide](./packages/stats-visualizer/QUICK_START.md)
 
 ### Path 2: I Want to See a Demo (10 minutes)
 1. **Clone/Navigate:** `cd demo`
@@ -50,14 +50,14 @@ npm run dev
 3. **Run:** `npm run dev`
 4. **Explore:** Open http://localhost:5173
 
-👉 **Continue here:** [Demo App README](./demo/README.md)
+**Continue here:** [Demo App README](./demo/README.md)
 
 ### Path 3: I Want to Understand Everything (15 minutes)
 1. **Read:** [Main User Guide](./packages/stats-visualizer/README.md)
 2. **Learn:** [API Reference](./packages/stats-visualizer/API_REFERENCE.md)
 3. **Integrate:** Copy examples from [Real-World Examples](./packages/stats-visualizer/README.md#real-world-examples)
 
-👉 **Start here:** [Full README](./packages/stats-visualizer/README.md)
+**Start here:** [Full README](./packages/stats-visualizer/README.md)
 
 ### Path 4: I Want to Contribute (Developer)
 1. **Setup:** `cd packages/stats-visualizer && npm install`
@@ -65,9 +65,9 @@ npm run dev
 3. **Test:** `npm test`
 4. **Build:** `npm run build`
 
-👉 **Start here:** [Developer Guide](./packages/stats-visualizer/DEVELOPER_GUIDE.md)
+**Start here:** [Developer Guide](./packages/stats-visualizer/DEVELOPER_GUIDE.md)
 
-## 📚 Documentation
+## Documentation
 
 All documentation is organized by audience and use case:
 
@@ -84,7 +84,7 @@ All documentation is organized by audience and use case:
 | [DEVELOPER_GUIDE.md](./packages/stats-visualizer/DEVELOPER_GUIDE.md) | Architecture, testing, contributing |
 | [Demo App README](./demo/README.md) | Running and customizing the demo |
 
-## 🎯 Key Features
+## Key Features
 
 ### 5 Chart Components
 - **SessionsOverDays** - Line chart of session frequency
@@ -107,19 +107,19 @@ import {
 ```
 
 ### Design & UX
-- 🎨 Light/dark theme with system detection
-- 📱 100% responsive (mobile, tablet, desktop)
-- ⚙️ Zero configuration required
-- 🎯 Type-safe TypeScript support
-- ♿ Accessible markup
+- Light/dark theme with system detection
+- 100% responsive (mobile, tablet, desktop)
+- Zero configuration required
+- Type-safe TypeScript support
+- Accessible markup
 
 ### Quality & Reliability
-- 🧪 32 unit tests (100% utilities covered)
-- 📦 Production-ready code
-- 🚀 Optimized for performance
-- 📖 Comprehensive documentation
+- 32 unit tests (100% utilities covered)
+- Production-ready code
+- Optimized for performance
+- Comprehensive documentation
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 rwm_p2_project/
@@ -147,7 +147,7 @@ rwm_p2_project/
 └── README.md                          # This file
 ```
 
-## 🛠 Development
+## Development
 
 ### Setup
 ```bash
@@ -187,7 +187,7 @@ npm run dev
 # Open http://localhost:5173
 ```
 
-## 📊 Testing
+## Testing
 
 ### Test Coverage
 - **types.test.ts**: 12 tests for TypeScript type definitions
@@ -211,7 +211,7 @@ Test Files  2 passed (2)
 
 ✅ **All 32 tests passing!**
 
-## 🎓 Learning Path
+## Learning Path
 
 ### Beginner - "I want to use the charts"
 1. Read [QUICK_START.md](./packages/stats-visualizer/QUICK_START.md)
@@ -229,7 +229,7 @@ Test Files  2 passed (2)
 3. Check the component and utility source code
 4. Write tests and submit PR
 
-## 🎯 Use Cases
+## Use Cases
 
 ### Activity Tracker Dashboard
 Visualize daily sessions, track ratings, and monitor streaks:
@@ -260,7 +260,7 @@ const taskData = getTaskSessions(sessions, 'task-id');
 const streak = calculateDailyStreak(sessions);
 ```
 
-## 🔗 Integration
+## Integration
 
 ### With SvelteKit
 ```svelte
@@ -278,27 +278,17 @@ import { aggregateByWeek } from '@ayola/stats-visualizer';
 const weeks = aggregateByWeek(sessions); // Use anywhere
 ```
 
-## 🐛 Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| "Module not found" | Run `npm install @ayola/stats-visualizer` |
-| Charts not rendering | Verify data array is populated and not empty |
-| TypeScript errors | Import types: `import type { SessionData } from '...'` |
-| Theme not switching | Ensure parent element allows style application |
-| Tests failing | Navigate to package and run `npm install` first |
-
-## 📞 Support
+## Support
 
 ### Documentation
-- 📖 [README](./packages/stats-visualizer/README.md) - Main guide
-- ⚡ [Quick Start](./packages/stats-visualizer/QUICK_START.md) - 5-minute setup
-- 📚 [API Reference](./packages/stats-visualizer/API_REFERENCE.md) - Complete API
-- 👨‍💻 [Developer Guide](./packages/stats-visualizer/DEVELOPER_GUIDE.md) - Contributing
+- [README](./packages/stats-visualizer/README.md) - Main guide
+- [Quick Start](./packages/stats-visualizer/QUICK_START.md) - 5-minute setup
+- [API Reference](./packages/stats-visualizer/API_REFERENCE.md) - Complete API
+- [Developer Guide](./packages/stats-visualizer/DEVELOPER_GUIDE.md) - Contributing
 
 ### Examples
-- 🎨 [Demo App](./demo) - Interactive showcase
-- 💡 [Real-World Examples](./packages/stats-visualizer/README.md#real-world-examples) - Code samples
+- [Demo App](./demo) - Interactive showcase
+- [Real-World Examples](./packages/stats-visualizer/README.md#real-world-examples) - Code samples
 
 ### Testing
 ```bash
@@ -306,27 +296,11 @@ cd packages/stats-visualizer
 npm test              # Run tests
 npm run test:ui       # Visual test runner
 ```
-
-## 📝 License
-
-MIT
-
-## ✨ Credits
-
-**Project**: RWM P2 - Reusable Web Module  
-**Author**: Olawole Abayomi-Owodunni  
-**Year**: 2024-2025  
-**Status**: ✅ Complete
-
----
-
-## 🎉 Ready to Get Started?
+## Ready to Get Started?
 
 Choose your path:
 
-- 🚀 **Just want to use it?** → [Quick Start Guide](./packages/stats-visualizer/QUICK_START.md) (5 min)
-- 🎨 **Want to see it in action?** → [Demo App](./demo) (10 min)
-- 📖 **Want to learn everything?** → [Full README](./packages/stats-visualizer/README.md) (15 min)
-- 👨‍💻 **Want to contribute?** → [Developer Guide](./packages/stats-visualizer/DEVELOPER_GUIDE.md)
-
-**Let's build amazing dashboards! 📊**
+- **Just want to use it?** -> [Quick Start Guide](./packages/stats-visualizer/QUICK_START.md) (5 min)
+- **Want to see it in action?** -> [Demo App](./demo) (10 min)
+- **Want to learn everything?** -> [Full README](./packages/stats-visualizer/README.md) (15 min)
+- **Want to contribute?** -> [Developer Guide](./packages/stats-visualizer/DEVELOPER_GUIDE.md)

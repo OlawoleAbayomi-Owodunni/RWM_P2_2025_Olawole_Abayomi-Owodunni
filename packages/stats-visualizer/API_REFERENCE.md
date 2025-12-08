@@ -521,27 +521,6 @@ const session: SessionData = {
 
 ---
 
-## Browser Support
-
-- Chrome/Edge 90+
-- Firefox 88+
-- Safari 14+
-- Mobile browsers (iOS Safari 14+, Android Chrome)
-
----
-
-## Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| Chart not showing | Verify data array is not empty |
-| Wrong dates in output | Use ISO format (YYYY-MM-DD) for date strings |
-| Theme not applying | Ensure parent has CSS support for CSS variables |
-| Performance slow | Filter data to last 90 days using `filterByDateRange()` |
-| TypeScript errors | Import types: `import type { SessionData } from '@ayola/stats-visualizer'` |
-
----
-
 ## Examples
 
 See [demo app](../demo) for working examples of all components and utilities.

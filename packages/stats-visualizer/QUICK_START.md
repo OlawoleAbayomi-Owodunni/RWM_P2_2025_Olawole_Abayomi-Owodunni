@@ -29,7 +29,7 @@ npm install @ayola/stats-visualizer
 npm run dev
 ```
 
-Done! 🎉
+Done!
 
 ---
 
@@ -140,6 +140,6 @@ That's literally all you need to know!
 
 ## Need More?
 
-- 📖 Full docs: See [README.md](README.md)
-- 🧪 Tests: `npm test`
-- 💬 Examples: Check [demo app](../demo)
+- Full docs: See [README.md](README.md)
+- Tests: `npm test`
+- Examples: Check [demo app](../demo)
