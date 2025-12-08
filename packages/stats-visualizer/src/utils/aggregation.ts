@@ -91,20 +91,35 @@ export function getAverageRatingPerTask(sessions: SessionData[]): Record<string,
  * Calculate daily streak
  */
 export function calculateDailyStreak(sessions: SessionData[]): {
-  current: number;
-  longest: number;
+  currentStreak: number;
+  longestStreak: number;
   details: DailyStreak[];
 } {
   const byDay = aggregateSessionsByDay(sessions);
   const dates = Object.keys(byDay).sort();
   
-  let currentStreak = 0;
+  if (dates.length === 0) {
+    return {
+      currentStreak: 0,
+      longestStreak: 0,
+      details: []
+    };
+  }
+
   let longestStreak = 0;
   let tempStreak = 0;
+  let currentStreak = 0;
   
   const details: DailyStreak[] = [];
   const today = new Date();
+  const dayStates: { [key: string]: boolean } = {};
   
+  // Mark all days with sessions
+  dates.forEach(dateKey => {
+    dayStates[dateKey] = true;
+  });
+  
+  // Build 365-day history from today backwards
   for (let i = 0; i < 365; i++) {
     const date = new Date(today);
     date.setDate(date.getDate() - i);
@@ -117,22 +132,36 @@ export function calculateDailyStreak(sessions: SessionData[]): {
       sessionCount: hasSessions ? byDay[dateKey].length : 0,
       rating: hasSessions ? (byDay[dateKey].reduce((sum, s) => sum + s.rating, 0) / byDay[dateKey].length) : undefined
     });
-    
-    if (hasSessions) {
+  }
+  
+  // Reverse to go chronologically forward
+  details.reverse();
+  
+  // Calculate streaks by going through days chronologically
+  for (let i = 0; i < details.length; i++) {
+    if (details[i].hasSession) {
       tempStreak++;
-      if (currentStreak === 0 && i === 0) currentStreak = 1;
-      if (currentStreak > 0 && i <= currentStreak) currentStreak = tempStreak;
       longestStreak = Math.max(longestStreak, tempStreak);
     } else {
       tempStreak = 0;
-      if (i > 0) currentStreak = 0;
     }
   }
   
+  // Calculate current streak from today backwards
+  tempStreak = 0;
+  for (let i = details.length - 1; i >= 0; i--) {
+    if (details[i].hasSession) {
+      tempStreak++;
+    } else {
+      break;
+    }
+  }
+  currentStreak = tempStreak;
+  
   return {
-    current: currentStreak,
-    longest: longestStreak,
-    details: details.reverse()
+    currentStreak,
+    longestStreak,
+    details
   };
 }
 

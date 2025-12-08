@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SessionsOverDays, AvgRatingPerTask, SessionRatingsPerTask, TasksPerMonth } from '@ayola/stats-visualizer';
+  import { SessionsOverDays, AvgRatingPerTask, SessionRatingsPerTask, TasksPerMonth, DailyStreakTracker } from '@ayola/stats-visualizer';
   import type { SessionData, TaskData, ChartConfig } from '@ayola/stats-visualizer';
 
   let sessions: SessionData[] = [];
@@ -99,6 +99,10 @@
 
     <section>
       <TasksPerMonth data={tasks} {config} />
+    </section>
+
+    <section>
+      <DailyStreakTracker data={sessions} {config} />
     </section>
 
     <section class="info">
