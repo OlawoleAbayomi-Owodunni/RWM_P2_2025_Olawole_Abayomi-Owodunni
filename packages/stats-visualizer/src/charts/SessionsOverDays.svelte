@@ -262,5 +262,45 @@
     .chart-stats {
       grid-template-columns: 1fr;
     }
+
+    .stat-item {
+      padding: 0.75rem;
+    }
+
+    .label {
+      font-size: 0.75rem;
+    }
+
+    .value {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .chart-container {
+      padding: 0.75rem;
+    }
+
+    .chart-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .chart-stats {
+      gap: 0.5rem;
+    }
+
+    .stat-item {
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+    }
+
+    .label {
+      font-size: 0.65rem;
+    }
+
+    .value {
+      font-size: 1rem;
+    }
   }
 </style>
