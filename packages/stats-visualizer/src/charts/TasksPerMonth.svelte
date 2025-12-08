@@ -334,5 +334,44 @@
     .stats {
       grid-template-columns: 1fr;
     }
+
+    .stat {
+      padding: 0.75rem;
+    }
+
+    .label {
+      font-size: 0.75rem;
+    }
+
+    .value {
+      font-size: 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .chart-container {
+      padding: 0.75rem;
+    }
+
+    .chart-header h2 {
+      font-size: 1rem;
+    }
+
+    .stats {
+      gap: 0.5rem;
+    }
+
+    .stat {
+      padding: 0.5rem;
+      border-radius: 0.375rem;
+    }
+
+    .label {
+      font-size: 0.65rem;
+    }
+
+    .value {
+      font-size: 1rem;
+    }
   }
 </style>

@@ -232,5 +232,65 @@
     main {
       gap: 1.5rem;
     }
+
+    .controls {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 0.75rem;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    header p {
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 1rem;
+      border-radius: 0.75rem;
+    }
+
+    main {
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.65rem 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .info {
+      font-size: 0.9rem;
+    }
+
+    .info h2 {
+      font-size: 1.2rem;
+    }
+
+    .info p {
+      line-height: 1.5;
+      margin-bottom: 0.75rem;
+    }
+
+    .info ul {
+      padding-left: 1.5rem;
+    }
+
+    .info li {
+      margin-bottom: 0.35rem;
+      font-size: 0.85rem;
+    }
   }
 </style>

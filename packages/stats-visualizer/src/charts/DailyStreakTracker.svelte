@@ -402,5 +402,75 @@
     .value {
       font-size: 1.5rem;
     }
+
+    .label {
+      font-size: 0.65rem;
+    }
+
+    .heatmap-wrapper {
+      min-height: 150px;
+    }
+
+    .legend {
+      font-size: 0.8rem;
+      gap: 0.5rem;
+    }
+
+    .legend-cell {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .chart-container {
+      padding: 0.75rem;
+    }
+
+    .chart-header h2 {
+      font-size: 1rem;
+    }
+
+    .stats-row {
+      gap: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .stat {
+      min-width: 70px;
+      padding: 0.35rem 0.5rem;
+      border-radius: 0.375rem;
+    }
+
+    .label {
+      font-size: 0.6rem;
+    }
+
+    .value {
+      font-size: 1.25rem;
+    }
+
+    .unit {
+      font-size: 0.6rem;
+    }
+
+    .heatmap-wrapper {
+      min-height: 120px;
+      margin-bottom: 0.75rem;
+    }
+
+    .legend {
+      font-size: 0.7rem;
+      gap: 0.35rem;
+    }
+
+    .legend-item {
+      gap: 0.3rem;
+    }
+
+    .legend-cell {
+      width: 10px;
+      height: 10px;
+    }
   }
 </style>
