@@ -9,8 +9,9 @@
     height: 'auto',
     responsive: true
   };
+  export let currentDate: Date = new Date();
 
-  $: streakData = calculateDailyStreak(data);
+  $: streakData = calculateDailyStreak(data, currentDate);
   $: currentStreak = streakData.currentStreak || 0;
   $: longestStreak = streakData.longestStreak || 0;
   $: activeDays = streakData.details?.filter(d => d.hasSession).length || 0;

@@ -1,20 +1,27 @@
 <script lang="ts">
   import { DailyStreakTracker, FlameTracker, TrophyTracker } from '@ayola/stats-visualizer';
   import type { SessionData, TaskData, ChartConfig } from '@ayola/stats-visualizer';
-  import { getSessions, getTasks, saveSessions, saveTasks, clearStoredData, hasStoredData } from '$lib/utils/storage';
+  import { getSessions, getTasks, saveSessions, saveTasks, clearStoredData, hasStoredData, getAppTime, advanceAppTime } from '$lib/utils/storage';
+  import AddSessionModal from '../../components/AddSessionModal/AddSessionModal.svelte';
+  import CreateTaskModal from '../../components/CreateTaskModal/CreateTaskModal.svelte';
   import { onMount } from 'svelte';
 
-  let sessions: SessionData[] = [];
-  let tasks: TaskData[] = [];
-  let dataLoaded = false;
+  let sessions = $state<SessionData[]>([]);
+  let tasks = $state<TaskData[]>([]);
+  let dataLoaded = $state(false);
+  let showAddModal = $state(false);
+  let showCreateTaskModal = $state(false);
+  let selectedDate = $state(new Date().toISOString().split('T')[0]);
+  let appTime = $state(new Date());
 
   function generateSampleData() {
     sessions = [];
     tasks = [];
 
-    // Generate tasks with completion dates spread across months
+    // Generate tasks with completion dates spread across months from app time
+    const baseDate = new Date(appTime);
     for (let i = 0; i < 12; i++) {
-      const completedDate = new Date();
+      const completedDate = new Date(baseDate);
       completedDate.setMonth(completedDate.getMonth() - i);
       completedDate.setDate(1 + Math.floor(Math.random() * 28));
 
@@ -31,8 +38,9 @@
       }
     }
 
+    // Generate sessions for the last 30 days from app time
     for (let i = 0; i < 30; i++) {
-      const date = new Date();
+      const date = new Date(appTime);
       date.setDate(date.getDate() - i);
       const dateStr = date.toISOString().split('T')[0];
 
@@ -60,6 +68,53 @@
     clearStoredData();
   }
 
+  function addSession(session: SessionData) {
+    sessions = [...sessions, session];
+    saveSessions(sessions);
+  }
+
+  function goToToday() {
+    selectedDate = new Date().toISOString().split('T')[0];
+  }
+
+  function goPreviousDay() {
+    const date = new Date(selectedDate);
+    date.setDate(date.getDate() - 1);
+    selectedDate = date.toISOString().split('T')[0];
+  }
+
+  function goNextDay() {
+    const date = new Date(selectedDate);
+    date.setDate(date.getDate() + 1);
+    selectedDate = date.toISOString().split('T')[0];
+  }
+
+  function advanceDay() {
+    appTime = advanceAppTime(1);
+    selectedDate = appTime.toISOString().split('T')[0];
+  }
+
+  function advanceWeek() {
+    appTime = advanceAppTime(7);
+    selectedDate = appTime.toISOString().split('T')[0];
+  }
+
+  function advanceMonth() {
+    appTime = advanceAppTime(30);
+    selectedDate = appTime.toISOString().split('T')[0];
+  }
+
+  function addTask(task: TaskData) {
+    tasks = [...tasks, task];
+    saveTasks(tasks);
+  }
+
+  // Get sessions for selected date
+  let sessionsForDate = $state<SessionData[]>([]);
+  $effect(() => {
+    sessionsForDate = sessions.filter(s => s.date === selectedDate);
+  });
+
   // Load data on component mount
   onMount(() => {
     if (hasStoredData()) {
@@ -69,6 +124,8 @@
       // Generate initial data if none exists
       generateSampleData();
     }
+    appTime = getAppTime();
+    selectedDate = appTime.toISOString().split('T')[0];
     dataLoaded = true;
   });
 
@@ -107,27 +164,63 @@
 
   <div class="controls-bar">
     <div class="controls-group">
-      <button on:click={generateSampleData} class="primary">
+      <button onclick={generateSampleData} class="primary">
         Generate New Data
       </button>
-      <button on:click={clearData} class="secondary">
+      <button onclick={clearData} class="secondary">
         Clear Data
+      </button>
+      <button onclick={() => (showAddModal = true)} class="success">
+        + Add Session
+      </button>
+      <button onclick={() => (showCreateTaskModal = true)} class="info">
+        + Create Task
       </button>
     </div>
     <a href="/stats" class="nav-link">Analytics</a>
   </div>
 
+  <div class="time-controls">
+    <div class="time-display">
+      <span class="time-label">App Time:</span>
+      <span class="current-time">{appTime.toLocaleDateString()}</span>
+    </div>
+    <div class="time-buttons">
+      <button onclick={advanceDay} class="time-btn" title="Advance 1 day">
+        +1 Day
+      </button>
+      <button onclick={advanceWeek} class="time-btn" title="Advance 1 week">
+        +1 Week
+      </button>
+      <button onclick={advanceMonth} class="time-btn" title="Advance 1 month">
+        +1 Month
+      </button>
+    </div>
+  </div>
+
+  <div class="date-navigation">
+    <button onclick={goPreviousDay} class="date-btn">← Previous</button>
+    <div class="date-display">
+      <span class="selected-date">{selectedDate}</span>
+      <span class="session-count">({sessionsForDate.length} sessions)</span>
+      {#if selectedDate !== new Date().toISOString().split('T')[0]}
+        <button onclick={goToToday} class="today-btn">Today</button>
+      {/if}
+    </div>
+    <button onclick={goNextDay} class="date-btn">Next →</button>
+  </div>
+
   <main>
     <section>
-      <FlameTracker data={sessions} config={flameConfig} />
+      <FlameTracker data={sessions} config={flameConfig} currentDate={appTime} />
     </section>
 
     <section>
-      <TrophyTracker data={tasks} config={trophyConfig} />
+      <TrophyTracker data={tasks} config={trophyConfig} currentDate={appTime} />
     </section>
 
     <section>
-      <DailyStreakTracker data={sessions} config={streakConfig} />
+      <DailyStreakTracker data={sessions} config={streakConfig} currentDate={appTime} />
     </section>
 
     <section class="info">
@@ -168,6 +261,9 @@
     </section>
   </main>
 </div>
+
+<AddSessionModal isOpen={showAddModal} {tasks} onClose={() => (showAddModal = false)} onSave={addSession} />
+<CreateTaskModal isOpen={showCreateTaskModal} onClose={() => (showCreateTaskModal = false)} onSave={addTask} />
 
 <style>
   .container {
@@ -221,6 +317,62 @@
     gap: 1rem;
   }
 
+  .date-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .date-display {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .selected-date {
+    font-weight: 600;
+    color: #333;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+  }
+
+  .session-count {
+    color: #999;
+    font-size: 0.9rem;
+  }
+
+  .date-btn,
+  .today-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+
+  .date-btn:hover,
+  .today-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+
+  .today-btn {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
   button,
   .nav-link {
     padding: 0.75rem 1.5rem;
@@ -251,6 +403,86 @@
 
   button.secondary:hover {
     background: #d0d0d0;
+  }
+
+  button.success {
+    background: linear-gradient(135deg, #00d084 0%, #00a55e 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+  }
+
+  button.success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 208, 132, 0.3);
+  }
+
+  button.info {
+    background: linear-gradient(135deg, #0099ff 0%, #0077cc 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+  }
+
+  button.info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 153, 255, 0.3);
+  }
+
+  .time-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+  }
+
+  .time-display {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .time-label {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 0.9rem;
+  }
+
+  .current-time {
+    font-weight: 600;
+    color: #333;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+  }
+
+  .time-buttons {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .time-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+  }
+
+  .time-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
   }
 
   .info {

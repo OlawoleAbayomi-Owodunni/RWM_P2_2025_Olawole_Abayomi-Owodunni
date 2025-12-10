@@ -90,7 +90,7 @@ export function getAverageRatingPerTask(sessions: SessionData[]): Record<string,
 /**
  * Calculate daily streak
  */
-export function calculateDailyStreak(sessions: SessionData[]): {
+export function calculateDailyStreak(sessions: SessionData[], currentDate: Date = new Date()): {
   currentStreak: number;
   longestStreak: number;
   details: DailyStreak[];
@@ -111,7 +111,8 @@ export function calculateDailyStreak(sessions: SessionData[]): {
   let currentStreak = 0;
   
   const details: DailyStreak[] = [];
-  const today = new Date();
+  const today = new Date(currentDate);
+  today.setHours(0, 0, 0, 0);
   const dayStates: { [key: string]: boolean } = {};
   
   // Mark all days with sessions

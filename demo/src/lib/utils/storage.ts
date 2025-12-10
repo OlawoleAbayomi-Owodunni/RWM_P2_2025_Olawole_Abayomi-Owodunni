@@ -2,6 +2,7 @@ import type { SessionData, TaskData } from '@ayola/stats-visualizer';
 
 const SESSIONS_KEY = 'rwm_sessions';
 const TASKS_KEY = 'rwm_tasks';
+const APP_TIME_KEY = 'rwm_app_time';
 
 /**
  * Save sessions to localStorage
@@ -58,12 +59,50 @@ export function getTasks(): TaskData[] {
 }
 
 /**
+ * Get the current app time (can be different from real time for testing)
+ */
+export function getAppTime(): Date {
+	if (typeof window !== 'undefined') {
+		const stored = localStorage.getItem(APP_TIME_KEY);
+		if (stored) {
+			try {
+				return new Date(stored);
+			} catch {
+				console.error('Failed to parse stored app time');
+				return new Date();
+			}
+		}
+	}
+	return new Date();
+}
+
+/**
+ * Set the app time
+ */
+export function setAppTime(date: Date): void {
+	if (typeof window !== 'undefined') {
+		localStorage.setItem(APP_TIME_KEY, date.toISOString());
+	}
+}
+
+/**
+ * Advance app time by days
+ */
+export function advanceAppTime(days: number): Date {
+	const currentTime = getAppTime();
+	currentTime.setDate(currentTime.getDate() + days);
+	setAppTime(currentTime);
+	return currentTime;
+}
+
+/**
  * Clear all stored data
  */
 export function clearStoredData(): void {
 	if (typeof window !== 'undefined') {
 		localStorage.removeItem(SESSIONS_KEY);
 		localStorage.removeItem(TASKS_KEY);
+		localStorage.removeItem(APP_TIME_KEY);
 	}
 }
 

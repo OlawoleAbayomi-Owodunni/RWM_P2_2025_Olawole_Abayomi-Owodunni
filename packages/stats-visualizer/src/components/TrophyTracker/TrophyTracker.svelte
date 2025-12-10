@@ -4,6 +4,7 @@
 
   export let data: TaskData[] = [];
   export let config: ChartConfig = {};
+  export let currentDate: Date = new Date();
 
   let containerWidth = 300;
   let containerHeight = 300;
@@ -25,7 +26,7 @@
 
   // Calculate trophy state from tasks
   $: if (data.length > 0) {
-    const now = new Date();
+    const now = new Date(currentDate);
     const currentMonthStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
     currentMonth = currentMonthStr;
 

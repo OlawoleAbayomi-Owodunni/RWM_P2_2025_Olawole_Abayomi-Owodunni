@@ -4,6 +4,7 @@
 
   export let data: SessionData[] = [];
   export let config: ChartConfig = {};
+  export let currentDate: Date = new Date();
 
   let containerWidth = 300;
   let containerHeight = 300;
@@ -36,7 +37,7 @@
 
     const lastSession = sortedByDate[0];
     const lastDate = new Date(lastSession.date);
-    const today = new Date();
+    const today = new Date(currentDate);
     today.setHours(0, 0, 0, 0);
     lastDate.setHours(0, 0, 0, 0);
 
@@ -49,7 +50,7 @@
     // Decay: Lose 15% per day without session
     let baseSize = Math.min(sessionCount * 3, 100);
     let decayFactor = Math.max(1 - daysSinceLast * 0.15, 0.1); // Never below 10% (smolder)
-    flameSize = baseSize * decayFactor;
+    flameSize = Math.min(baseSize * decayFactor, 100); // Cap at 100%
 
     // Determine flame level (for visual intensity)
     if (flameSize < 15) flameLevel = 0; // Smolder
@@ -197,6 +198,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
 
   .flame-svg {
