@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SessionsOverDays, AvgRatingPerTask, SessionRatingsPerTask, TasksPerMonth, DailyStreakTracker } from '@ayola/stats-visualizer';
+  import { SessionsOverDays, AvgRatingPerTask, SessionRatingsPerTask, TasksPerMonth, DailyStreakTracker, FlameTracker } from '@ayola/stats-visualizer';
   import type { SessionData, TaskData, ChartConfig } from '@ayola/stats-visualizer';
 
   let sessions: SessionData[] = [];
@@ -161,6 +161,13 @@
     height: 400,
     responsive: true
   };
+
+  let flameConfig: ChartConfig = {
+    title: 'Flame Tracker - Motivation Level',
+    theme: prefersDark ? 'dark' : 'light',
+    height: 400,
+    responsive: true
+  };
 </script>
 
 <div class="container">
@@ -205,6 +212,10 @@
 
     <section>
       <DailyStreakTracker data={filteredSessions} config={streakConfig} />
+    </section>
+
+    <section>
+      <FlameTracker data={filteredSessions} config={flameConfig} />
     </section>
 
     <section class="info">
@@ -262,6 +273,19 @@
           <li>52 weeks × 7 days grid layout</li>
           <li>Displays: Current Streak, Longest Streak, Total Active Days</li>
           <li>Hover tooltips show exact session counts per day</li>
+        </ul>
+      </div>
+
+      <div class="component-info">
+        <h3>🔥 Flame Tracker - Motivation</h3>
+        <p>Animated flame visualization tracking your session momentum and motivation level.</p>
+        <ul>
+          <li>Flame grows with each session (3% per session, capped at 100%)</li>
+          <li>Gradual decay on missed days (15% per day, never below 10% smolder)</li>
+          <li>4-level intensity system: Smolder → Low → Medium → High</li>
+          <li>Shows: Total Sessions, Current Intensity %, Days Since Last Session</li>
+          <li>Motivational messages based on flame level</li>
+          <li>Real-time animation with theme support</li>
         </ul>
       </div>
 
