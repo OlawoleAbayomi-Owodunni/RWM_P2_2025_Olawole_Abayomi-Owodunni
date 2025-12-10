@@ -10,6 +10,7 @@ export { default as SessionRatingsPerTask } from './charts/SessionRatingsPerTask
 export { default as TasksPerMonth } from './charts/TasksPerMonth.svelte';
 export { default as DailyStreakTracker } from './charts/DailyStreakTracker.svelte';
 export { FlameTracker } from './components/FlameTracker';
+export { TrophyTracker } from './components/TrophyTracker';
 
 // Export all types
 export type {

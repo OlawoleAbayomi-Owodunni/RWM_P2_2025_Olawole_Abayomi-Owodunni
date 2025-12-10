@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { SessionsOverDays, AvgRatingPerTask, SessionRatingsPerTask, TasksPerMonth, DailyStreakTracker, FlameTracker } from '@ayola/stats-visualizer';
+  import { SessionsOverDays, AvgRatingPerTask, SessionRatingsPerTask, TasksPerMonth, DailyStreakTracker, FlameTracker, TrophyTracker } from '@ayola/stats-visualizer';
   import type { SessionData, TaskData, ChartConfig } from '@ayola/stats-visualizer';
 
   let sessions: SessionData[] = [];
@@ -168,6 +168,13 @@
     height: 400,
     responsive: true
   };
+
+  let trophyConfig: ChartConfig = {
+    title: 'Trophy Tracker - Monthly Achievement',
+    theme: prefersDark ? 'dark' : 'light',
+    height: 400,
+    responsive: true
+  };
 </script>
 
 <div class="container">
@@ -216,6 +223,10 @@
 
     <section>
       <FlameTracker data={filteredSessions} config={flameConfig} />
+    </section>
+
+    <section>
+      <TrophyTracker data={tasks} config={trophyConfig} />
     </section>
 
     <section class="info">
@@ -285,6 +296,19 @@
           <li>4-level intensity system: Smolder → Low → Medium → High</li>
           <li>Shows: Total Sessions, Current Intensity %, Days Since Last Session</li>
           <li>Motivational messages based on flame level</li>
+          <li>Real-time animation with theme support</li>
+        </ul>
+      </div>
+
+      <div class="component-info">
+        <h3>🏆 Trophy Tracker - Monthly Achievement</h3>
+        <p>Animated trophy visualization tracking your monthly task completion milestones.</p>
+        <ul>
+          <li>Trophy grows with each task completed this month (8% per task, capped at 100%)</li>
+          <li>Resets automatically on the 1st of each month (fresh motivation cycle)</li>
+          <li>Milestone shimmer animation every 5 tasks completed</li>
+          <li>Shows: Tasks This Month, Trophy Fill %, Achievement Milestones</li>
+          <li>Motivational messages based on completion count</li>
           <li>Real-time animation with theme support</li>
         </ul>
       </div>
