@@ -2,6 +2,7 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import { page } from '$app/stores';
+	import { MobileNav } from '../components/MobileNav';
 
 	let { children } = $props();
 </script>
@@ -32,10 +33,22 @@
 
 {@render children()}
 
+<MobileNav />
+
 <style>
 	:global(body) {
 		margin: 0;
 		padding: 0;
+	}
+
+	:global(main) {
+		padding-bottom: 0;
+	}
+
+	@media (max-width: 640px) {
+		:global(main) {
+			padding-bottom: 80px;
+		}
 	}
 
 	.top-nav {
@@ -110,22 +123,9 @@
 		}
 	}
 
-	@media (max-width: 480px) {
-		.nav-container {
-			padding: 0.5rem 0.75rem;
-		}
-
-		.nav-logo h2 {
-			font-size: 1rem;
-		}
-
-		.nav-links {
-			gap: 0.5rem;
-		}
-
-		.nav-links a {
-			padding: 0.3rem 0.6rem;
-			font-size: 0.8rem;
+	@media (max-width: 640px) {
+		.top-nav {
+			display: none;
 		}
 	}
 </style>
